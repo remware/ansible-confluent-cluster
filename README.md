@@ -1,4 +1,4 @@
-It is funny to see that majority of the available material on the web on Kafka installation is based on single instance Zookeeper & Kafka Broker installation.
+Installation on Ubuntu.
 Few Multi-broker guidelines are about installing brokers on the same host with different broker ports.
 
 ## What does this installation do ?
@@ -10,7 +10,7 @@ Few Multi-broker guidelines are about installing brokers on the same host with d
 For basic installation what you need to do is to set `hosts` file (`-i` option) and provide `-l` option to further specify that group of servers, given that your `hosts` file includes more than one group of hosts.
 
 ```
-ansible-playbook -i environment/cloudenv/hosts -l kafka -u root playbook.yml
+ansible-playbook -i environment/cloudenv/hosts -l kafka -u vagrant playbook.yml
 ```
 
 There a few variables in our configuration which you may want to change:

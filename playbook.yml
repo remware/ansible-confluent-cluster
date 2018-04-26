@@ -1,4 +1,4 @@
-# TODO: This cookbook is now limited to Centos/Redhat 6 and requires to be modified for Centos7
+# TODO: Finnish Ubuntu support
 ---
 - hosts: all
   any_errors_fatal: true
@@ -99,6 +99,7 @@
           state: present
       become: true
 
+    # Ubuntu playbook install
     - name: Update repositories cache and install confluent-platform package
       apt:
           name: "confluent-platform-oss-{{ scala_version }}"
@@ -106,25 +107,23 @@
           update_cache: yes
       become: true
     
-
-      # Ubuntu playbook 
     - name: Installing Confluent Platform
       apt:
-          name: confluent-kafka-2.11.7
+          name: confluent-kafka-{{ scala_version }}
           state: present
       when: (confluent_version == "2.0.1")
       become: true
 
     - name: Installing Confluent Open Source
       apt:
-          name:  confluent-platform-oss-2.11
+          name:  confluent-platform-oss-{{ scala_version }}
           state: present
       when: (confluent_version ==  "3.1.1") and (not confluent_enterprise)
       become: true
 
     - name: Installing  Confluent Enterprise
       apt:
-          name:  confluent-platform-2.11
+          name:  confluent-platform-{{ scala_version }}
           state: present
       when: (confluent_version ==  "3.1.1") and confluent_enterprise
       become: true
