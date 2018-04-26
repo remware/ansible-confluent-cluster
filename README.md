@@ -55,16 +55,16 @@ nohup zookeeper-server-start /etc/kafka/zookeeper.properties > zookeeper.log 2>&
 nohup kafka-server-start /etc/kafka/server.properties > kafka.log 2>&1 &
 ```
 ## Create a Sample Topic
-Create a topic (`topicn`) with `3` partitions (or more) and replication factor of `3`.
+Create a topic (`topicn`) with `3` partitions (or more) and replication factor of `3`. Probably in one of the nodes.
 
 ```
-kafka-topics --create --zookeeper 138.68.108.100:2181,138.68.106.52:2181,138.68.110.33:2181  --topic topicn --replication-factor 3 --partitions 3
+kafka-topics --create --zookeeper 192.168.56.104:2181,192.168.56.105:2181,192.168.56.106:2181  --topic topicn --replication-factor 3 --partitions 3
 ```
 
 See that topic partitions are uniformly distributed across available brokers.
 
 ```
-kafka-topics --describe --zookeeper 138.68.108.100:2181,138.68.106.52:2181,138.68.110.33:2181 --topic topicn
+kafka-topics --describe --zookeeper 192.168.56.104:2181,192.168.56.105:2181,192.168.56.106:2181 --topic topicn
 ```
 
 ```
@@ -79,7 +79,7 @@ Topic:topicn	PartitionCount:3	ReplicationFactor:3	Configs:
 Use `kafka-veriable-producer` to generate some messages in topic.
 
 ```
-kafka-verifiable-producer --broker-list 138.68.108.100:9092,138.68.106.52:9092,138.68.110.33:9092 --topic topicn --max-messages 1000
+kafka-verifiable-producer --broker-list 192.168.56.104:9092,192.168.56.105:9092,192.168.56.106:9092 --topic topicn --max-messages 1000
 ```
 
 ## Consume Messages
@@ -97,10 +97,10 @@ Ensure that you properly changed following variables in file before you execute 
 ```
 python simple_python_client.py
 ```
-
+The client might require python, kafka-python,  cheetah,  launchpadlib
 ```
 Simple Kafka Consumer
-  Bootstrap Servers: 138.68.110.33:9092,138.68.106.52:9092,138.68.108.100:9092
+  Bootstrap Servers: 192.168.56.104:9092,192.168.56.105:9092,192.168.56.106:9092
   Topic: b'topicn'
   Maximum Messages: 10
 

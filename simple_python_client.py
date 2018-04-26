@@ -8,7 +8,7 @@ from pykafka import KafkaClient
 
 # Modify those parameters based on your needs.
 _max_messages_to_consume = 1200
-_bootstrap_servers = '138.68.110.33:9092,138.68.106.52:9092,138.68.108.100:9092'
+_bootstrap_servers = '192.168.56.104:9092,192.168.56.105:9092,192.168.56.106:9092'
 _topic = b'topicn'
 
 client = KafkaClient(hosts=_bootstrap_servers)
