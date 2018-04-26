@@ -130,20 +130,25 @@
 
     - name: Change owner of /var/log/kafka to {{kafka_user}}:{{kafka_group}}
       file: path="/var/log/kafka" recurse=true owner={{kafka_user}} group={{kafka_group}}
+      become: true
 
     - name: Configure /etc/kafka/zookeeper.properties
       template:
           src=zookeeper.j2
           dest=/etc/kafka/zookeeper.properties
+      become: true
 
     - name: Create zookeeper directory.
       file: dest={{new_mntp}}/zookeeper owner={{kafka_user}} group={{kafka_group}} state=directory
+      become: true
 
     - name: Create zookeeper directory.
       file: dest={{new_mntp}}/kafka owner={{kafka_user}} group={{kafka_group}} state=directory
+      become: true
 
     - name: Create myid files
       lineinfile: dest={{new_mntp}}/zookeeper/myid owner={{kafka_user}} group={{kafka_group}} line={{ broker_id + 1 }} create=yes
+      become: true
 
     - name: Configure kafka log.dirs
       ini_file:
@@ -152,6 +157,7 @@
           option: log.dirs
           value: "{{new_mntp}}/kafka"
           backup: yes
+      become: true
 
     - name: Configure kafka log.dirs
       ini_file:
@@ -160,6 +166,7 @@
           option: delete.topic.enable
           value: true
           backup: yes
+      become: true
 
     - debug: msg="Broker ID is set to be {{ broker_id }}"
 
@@ -170,6 +177,7 @@
           option: broker.id
           value: "{{ broker_id }}"
           backup: yes
+      become: true
 
     - name: Configure kafka zookeeper.connect
       ini_file:
@@ -178,6 +186,7 @@
           option: zookeeper.connect
           value: "{% for node in play_hosts %}{{ hostvars[node]['ansible_host']  }}:2181{% if not loop.last %},{% endif %}{% endfor %}"
           backup: yes
+      become: true
 
     - name: Configure kafka advertised.host.name
       ini_file:
@@ -186,4 +195,5 @@
           option: advertised.host.name
           value: "{{ ansible_host }}"
           backup: yes
+      become: true
 
