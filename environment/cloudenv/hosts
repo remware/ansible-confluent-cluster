@@ -1,0 +1,5 @@
+[kafka]
+ubuntu-kafka1 broker_id=0 ansible_host=192.168.56.104
+ubuntu-kafka2 broker_id=1 ansible_host=192.168.56.105
+ubuntu-kafka3 broker_id=2 ansible_host=192.168.56.106
+

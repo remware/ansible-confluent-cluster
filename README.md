@@ -10,7 +10,7 @@ Few Multi-broker guidelines are about installing brokers on the same host with d
 For basic installation what you need to do is to set `hosts` file (`-i` option) and provide `-l` option to further specify that group of servers, given that your `hosts` file includes more than one group of hosts.
 
 ```
-ansible-playbook -i environment/digitalocean/hosts -l kafka -u root playbook.yml
+ansible-playbook -i environment/cloudenv/hosts -l kafka -u root playbook.yml
 ```
 
 There a few variables in our configuration which you may want to change:
